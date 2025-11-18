@@ -1,83 +1,82 @@
-// form-validation.js
-document.getElementById('myForm').addEventListener('submit', function(e) {
+const rangeInput = document.getElementById("rangeInput");
+const rangeOutput = document.getElementById("rangeOutput");
+const form = document.getElementById("demoForm");
+
+rangeOutput.textContent = "Wert: " + rangeInput.value;
+
+rangeInput.addEventListener("input", function () {
+  rangeOutput.textContent = "Wert: " + this.value;
+});
+
+form.addEventListener("reset", function () {
+  alert("Formular zurückgesetzt!");
+});
+
+form.addEventListener("submit", function (e) {
+
+  console.log("e", e);
+
+  let valid = true;
+  // Email
+  let email = document.getElementById("emailInput");
+  let emailRegexp = /^[\w\-\.]+@[\w\-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegexp.test(email.value)) {
+    valid = false;
+    document.getElementById("emailError").textContent =
+      "Bitte gültige Email eingeben!";
+  } else {
+    document.getElementById("emailError").textContent = "";
+  }
+  // Passwort
+  let pw = document.getElementById("passwordInput");
+  let pwRegexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  if (!pwRegexp.test(pw.value)) {
+    valid = false;
+    document.getElementById("passwordError").textContent =
+      "Mind. 6 Zeichen, Buchstaben und Zahl!";
+  } else {
+    document.getElementById("passwordError").textContent = "";
+  }
+
+  // Tel
+  let tel = document.getElementById("telInput");
+  let telRegexp = /^\+?\d{10,15}$/;
+  if (!telRegexp.test(tel.value)) {
+    valid = false;
+    document.getElementById("telError").textContent =
+      "Bitte gültige Telefonnummer (mind. 10 Ziffern)!";
+  } else {
+    document.getElementById("telError").textContent = "";
+  }
+
+  // URL
+  let url = document.getElementById("urlInput");
+  let urlRegexp = /^https?:\/\/[\w\-\.]+(\.[a-zA-Z]{2,})+.*$/;
+  if (!urlRegexp.test(url.value)) {
+    valid = false;
+    document.getElementById("urlError").textContent =
+      "Bitte eine gültige URL eingeben!";
+  } else {
+    document.getElementById("urlError").textContent = "";
+  }
+
+  // Datei
+  let fileInput = document.getElementById("fileInput");
+  if (fileInput.files.length === 0) {
+    valid = false;
+    alert("Bitte Datei auswählen!");
+  }
+
+  // Verhindere das Absenden des Formulars
   e.preventDefault();
 
-  let form = e.target;
-  let valid = true;
-
-  function setError(input, message) {
-    input.classList.add('error');
-    input.classList.remove('success');
-    input.nextElementSibling.textContent = message;
-    valid = false;
-  }
-  function setSuccess(input) {
-    input.classList.remove('error');
-    input.classList.add('success');
-    input.nextElementSibling.textContent = '';
+  if (!valid) {
+    document.getElementById("successMsg").textContent = "";
+    return false;
   }
 
-  // Name prüfen
-  const name = form.name;
-  if (!name.value.trim()) setError(name, "Name ist erforderlich.");
-  else if (!name.value.match(/^[A-Za-z\s]{2,}$/)) setError(name, "Nur Buchstaben, mind. 2 Zeichen.");
-  else setSuccess(name);
+  document.getElementById("successMsg").textContent =
+    "Alle Eingaben erfolgreich überprüft und gesendet!";
 
-  // E-Mail prüfen
-  const email = form.email;
-  if (!email.value.trim()) setError(email, "E-Mail ist erforderlich.");
-  else if (!email.validity.valid) setError(email, "Bitte gültige E-Mail-Adresse.");
-  else setSuccess(email);
-
-  // Passwort prüfen
-  const password = form.password;
-  if (!password.value.trim()) setError(password, "Passwort ist erforderlich.");
-  else if (password.value.length < 6) setError(password, "Mindestens 6 Zeichen.");
-  else setSuccess(password);
-
-  // Alter prüfen
-  const age = form.age;
-  if (!age.value) setError(age, "Alter ist erforderlich.");
-  else if (age.value < 12 || age.value > 120) setError(age, "Zwischen 12 und 120.");
-  else setSuccess(age);
-
-  // Geschlecht prüfen
-  const gender = form.gender;
-  if (!gender.value) setError(gender, "Bitte Geschlecht wählen.");
-  else setSuccess(gender);
-
-  // Geburtsdatum prüfen
-  const birthdate = form.birthdate;
-  if (!birthdate.value) setError(birthdate, "Geburtsdatum ist erforderlich.");
-  else setSuccess(birthdate);
-
-  // Farbe prüfen
-  const color = form.color;
-  if (!color.value) setError(color, "Lieblingsfarbe ist erforderlich.");
-  else setSuccess(color);
-
-  // Webseite prüfen (optional)
-  const website = form.website;
-  if (website.value && !website.value.match(/^https?:\/\/.+/))
-    setError(website, "Gültige URL (http/https) erforderlich.");
-  else setSuccess(website);
-
-  // Nachricht prüfen (optional)
-  const message = form.message;
-  if (message.value.length > 140)
-    setError(message, "Maximal 140 Zeichen.");
-  else setSuccess(message);
-
-  // AGB prüfen
-  const agb = form.agb;
-  if (!agb.checked) setError(agb, "AGB müssen akzeptiert werden.");
-  else setSuccess(agb);
-
-  // Newsletter prüfen
-  const newsletter = form.newsletter;
-  if (!form.querySelector('input[name="newsletter"]:checked'))
-    setError(newsletter, "Bitte Newsletter wählen.");
-  else setSuccess(newsletter);
-
-  if (valid) form.submit();
+  form.reset();
 });

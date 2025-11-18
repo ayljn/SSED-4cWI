@@ -1,166 +1,166 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
-  <title>Formular mit Validierung</title>
+  <title>Alle HTML Eingabetypen</title>
   <style>
-    .error { border-color: red; }
-    .success { border-color: green; }
-    .errorMessage { color: red; font-size: 0.9em; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f8ff;
+      color: #222;
+    }
+
+    form {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #bbc;
+    }
+
+    .row {
+      margin-bottom: 1.4em;
+      width: 100%;
+    }
+
+    label {
+      margin-bottom: 0.4em;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 0.5em;
+      border: 1px solid #ccd;
+      border-radius: 4px;
+    }
+
+    .error {
+      color: #f00;
+      font-size: 0.95em;
+    }
+
+    .success {
+      color: #090;
+      font-size: 1em;
+      margin-top: 1em;
+    }
   </style>
 </head>
+
 <body>
-  <form id="myForm" novalidate>
-    <fieldset>
-      <legend>Persönliche Daten</legend>
-
-      <label for="name">Name *</label>
-      <input type="text" id="name" name="name" required pattern="^[A-Za-z\s]{2,}$">
-      <div class="errorMessage"></div>
-
-      <label for="email">E-Mail *</label>
-      <input type="email" id="email" name="email" required>
-      <div class="errorMessage"></div>
-
-      <label for="password">Passwort *</label>
-      <input type="password" id="password" name="password" required minlength="6">
-      <div class="errorMessage"></div>
-
-      <label for="age">Alter (12-120) *</label>
-      <input type="number" id="age" name="age" required min="12" max="120">
-      <div class="errorMessage"></div>
-
-      <label>Geschlecht *</label>
-      <select id="gender" name="gender" required>
-        <option value="">Bitte wählen</option>
-        <option value="male">männlich</option>
-        <option value="female">weiblich</option>
-        <option value="other">divers</option>
-      </select>
-      <div class="errorMessage"></div>
-
-      <label for="birthdate">Geburtsdatum *</label>
-      <input type="date" id="birthdate" name="birthdate" required>
-      <div class="errorMessage"></div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Sonstiges</legend>
-
-      <label for="color">Lieblingsfarbe *</label>
-      <input type="color" id="color" name="color" required>
-      <div class="errorMessage"></div>
-
-      <label for="website">Webseite</label>
-      <input type="url" id="website" name="website" pattern="https?://.+">
-      <div class="errorMessage"></div>
-
-      <label for="message">Nachricht</label>
-      <textarea id="message" name="message" maxlength="140"></textarea>
-      <div class="errorMessage"></div>
-
-      <label>Einstellungen *</label>
-      <input type="checkbox" id="agb" name="agb" required>
-      <label for="agb">Ich akzeptiere die AGB</label>
-      <div class="errorMessage"></div>
-
-      <label>Newsletter?</label>
-      <input type="radio" id="newsletter1" name="newsletter" value="ja" required>
-      <label for="newsletter1">Ja</label>
-      <input type="radio" id="newsletter2" name="newsletter" value="nein">
-      <label for="newsletter2">Nein</label>
-      <div class="errorMessage"></div>
-    </fieldset>
-    <button type="submit">Absenden</button>
+  <form id="demoForm">
+    <div class="row">
+      <label for="buttonInput">Button Beispiel:</label>
+      <input type="button" id="buttonInput" value="Klick mich" onclick="alert('Button gedrückt!')">
+    </div>
+    <div class="row">
+      <label for="checkboxInput">Checkbox:</label>
+      <input type="checkbox" id="checkboxInput" name="checkbox">
+    </div>
+    <div class="row">
+      <label for="colorInput">Farbe auswählen:</label>
+      <input type="color" id="colorInput" name="color" value="#3355ff">
+    </div>
+    <div class="row">
+      <label for="dateInput">Datum:</label>
+      <input type="date" id="dateInput" name="date" required>
+    </div>
+    <div class="row">
+      <label for="datetimeLocalInput">Datum & Uhrzeit (ohne Zeitzone):</label>
+      <input type="datetime-local" id="datetimeLocalInput" name="datetime-local" required>
+    </div>
+    <div class="row">
+      <label for="emailInput">Email:</label>
+      <input type="email" id="emailInput" name="email" required pattern="^[\w-\.]+@[\w\-]+\.[a-zA-Z]{2,}$">
+      <span class="error" id="emailError"></span>
+    </div>
+    <div class="row">
+      <label for="fileInput">Datei auswählen:</label>
+      <input type="file" id="fileInput" name="file" accept=".jpg,.jpeg,.png,.pdf,.txt" required>
+    </div>
+    <div class="row">
+      <label for="hidden">Hidden:</label>
+      <input type="hidden" id="hidden" name="hidden" value="versteckter Wert">
+      <span style="font-size:0.93em;color:#888;">(Nicht sichtbar, wird trotzdem abgeschickt)</span>
+    </div>
+    <div class="row">
+      <label for="imageInput">Bild Button:</label>
+      <input type="image" id="imageInput" src="https://via.placeholder.com/100x40?text=Senden" alt="Bild Senden Button">
+    </div>
+    <div class="row">
+      <label for="monthInput">Monat & Jahr:</label>
+      <input type="month" id="monthInput" name="month" required>
+    </div>
+    <div class="row">
+      <label for="nummerInput">Nummer:</label>
+      <input type="number" id="nummerInput" name="nummer" min="1" max="100" required>
+    </div>
+    <div class="row">
+      <label for="passwordInput">Passwort:</label>
+      <input type="password" id="passwordInput" name="password" required
+        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$">
+      <span class="error" id="passwordError"></span>
+    </div>
+    <div class="row">
+      <label>Radio:</label>
+      <div>
+        <span>
+          <input type="radio" id="radio1" name="radioGroup" value="option1" required>
+        </span>
+        <label for="radio1">Option 1</label>
+      </div>
+      <div>
+        <input type="radio" id="radio2" name="radioGroup" value="option2">
+        <label for="radio2">Option 2</label>
+      </div>
+      <div>
+        <input type="radio" id="radio3" name="radioGroup" value="option3">
+        <label for="radio3">Option 3</label>
+      </div>
+    </div>
+    <div class="row">
+      <label for="rangeInput">Bereich (1-100):</label>
+      <input type="range" id="rangeInput" name="range" min="1" max="100">
+      <span id="rangeOutput"></span>
+    </div>
+    <div class="row">
+      <label for="resetInput">Reset Button:</label>
+      <input type="reset" id="resetInput" value="Zurücksetzen">
+    </div>
+    <div class="row">
+      <label for="searchInput">Suche:</label>
+      <input type="search" id="searchInput" name="search">
+    </div>
+    <div class="row">
+      <label for="telInput">Telefonnummer:</label>
+      <input type="tel" id="telInput" name="tel" required pattern="^\+?\d{10,15}$">
+      <span class="error" id="telError"></span>
+    </div>
+    <div class="row">
+      <label for="textInput">Text:</label>
+      <input type="text" id="textInput" name="text" required>
+    </div>
+    <div class="row">
+      <label for="timeInput">Uhrzeit:</label>
+      <input type="time" id="timeInput" name="time" required>
+    </div>
+    <div class="row">
+      <label for="urlInput">URL:</label>
+      <input type="url" id="urlInput" name="url" required pattern="https?:\/\/[\w\-\.]+(\.[a-zA-Z]{2,})+.*">
+      <span class="error" id="urlError"></span>
+    </div>
+    <div class="row">
+      <label for="weekInput">Woche:</label>
+      <input type="week" id="weekInput" name="week" required>
+    </div>
+    <button type="submit">Senden</button>
+    <span class="success" id="successMsg">Erfolg?</span>
   </form>
-
-  <script>
-    document.getElementById('myForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // verhindert Abschicken
-
-      let form = e.target;
-      let valid = true;
-
-      // Hilfsfunktion für Fehlermeldungen
-      function setError(input, message) {
-        input.classList.add('error');
-        input.classList.remove('success');
-        input.nextElementSibling.textContent = message;
-        valid = false;
-      }
-      function setSuccess(input) {
-        input.classList.remove('error');
-        input.classList.add('success');
-        input.nextElementSibling.textContent = '';
-      }
-
-      // Name prüfen
-      const name = form.name;
-      if (!name.value.trim()) setError(name, "Name ist erforderlich.");
-      else if (!name.value.match(/^[A-Za-z\s]{2,}$/)) setError(name, "Nur Buchstaben, mind. 2 Zeichen.");
-      else setSuccess(name);
-
-      // E-Mail prüfen
-      const email = form.email;
-      if (!email.value.trim()) setError(email, "E-Mail ist erforderlich.");
-      else if (!email.validity.valid) setError(email, "Bitte gültige E-Mail-Adresse.");
-      else setSuccess(email);
-
-      // Passwort prüfen
-      const password = form.password;
-      if (!password.value.trim()) setError(password, "Passwort ist erforderlich.");
-      else if (password.value.length < 6) setError(password, "Mindestens 6 Zeichen.");
-      else setSuccess(password);
-
-      // Alter prüfen
-      const age = form.age;
-      if (!age.value) setError(age, "Alter ist erforderlich.");
-      else if (age.value < 12 || age.value > 120) setError(age, "Zwischen 12 und 120.");
-      else setSuccess(age);
-
-      // Geschlecht prüfen
-      const gender = form.gender;
-      if (!gender.value) setError(gender, "Bitte Geschlecht wählen.");
-      else setSuccess(gender);
-
-      // Geburtsdatum prüfen
-      const birthdate = form.birthdate;
-      if (!birthdate.value) setError(birthdate, "Geburtsdatum ist erforderlich.");
-      else setSuccess(birthdate);
-
-      // Farbe prüfen
-      const color = form.color;
-      if (!color.value) setError(color, "Lieblingsfarbe ist erforderlich.");
-      else setSuccess(color);
-
-      // Webseite prüfen (optional)
-      const website = form.website;
-      if (website.value && !website.value.match(/^https?:\/\/.+/))
-        setError(website, "Gültige URL (http/https) erforderlich.");
-      else setSuccess(website);
-
-      // Nachricht prüfen (optional)
-      const message = form.message;
-      if (message.value.length > 140)
-        setError(message, "Maximal 140 Zeichen.");
-      else setSuccess(message);
-
-      // AGB prüfen
-      const agb = form.agb;
-      if (!agb.checked) setError(agb, "AGB müssen akzeptiert werden.");
-      else setSuccess(agb);
-
-      // Newsletter prüfen
-      const newsletter = form.newsletter;
-      if (!form.querySelector('input[name="newsletter"]:checked'))
-        setError(newsletter, "Bitte Newsletter wählen.");
-      else setSuccess(newsletter);
-
-      if (valid) form.submit();
-    });
-  </script>
-
-<script src="main.js"></script>
-
+  <script src="main.js"></script>
 </body>
+
 </html>
