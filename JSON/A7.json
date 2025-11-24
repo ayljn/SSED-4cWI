@@ -1,0 +1,18 @@
+{
+  "name": "Aylin Aydin",
+  "alter": 17,
+  "größe": 1.68,
+  "student": false,
+  "hobbys": ["Unity", "Programmieren"],
+  "noten": [1, 2, 1, 3],
+  "projekt": {
+    "titel": "Mr.Chef",
+    "version": 4.0,
+    "fertig": true
+  },
+  "skills": {
+    "unity": 4,
+    "python": 3
+  },
+  "auto": null
+}
